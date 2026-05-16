@@ -1,13 +1,34 @@
 :root {
-    --color-primary: #0F172A; /* Deep slate blue */
+    /* Brand Core Palette */
+    --brand-blue: #1E40AF;      /* Royal Blue - Trust & Foundation */
+    --brand-blue-dark: #1E3A8A;
+    --brand-blue-light: #3B82F6;
+    
+    --brand-green: #059669;     /* Emerald Green - Quality & Action */
+    --brand-green-dark: #065F46;
+    --brand-green-light: #10B981;
+    
+    --brand-purple: #7C3AED;    /* Vibrant Purple - Premium Accent */
+    --brand-purple-dark: #5B21B6;
+    --brand-purple-light: #8B5CF6;
+
+    /* Legacy Support / Neutral */
+    --color-primary: var(--brand-blue-dark);
     --color-primary-light: #1E293B;
-    --color-secondary: #065F46; /* Deep forest green */
-    --color-secondary-light: #059669;
-    --color-accent: #6D28D9; /* Deep purple */
+    --color-secondary: var(--brand-green);
+    --color-secondary-light: var(--brand-green-light);
+    --color-accent: var(--brand-purple);
+    
     --color-text-dark: #0F172A;
-    --color-text-muted: #475569;
+    --brand-slate: #475569;
+    --color-text-muted: #64748B;
     --color-bg-light: #F8FAFC;
     --color-white: #FFFFFF;
+    
+    /* Brand Gradients */
+    --grad-premium: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-purple) 100%);
+    --grad-success: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-blue) 100%);
+    --grad-dark: linear-gradient(135deg, #0F172A 0%, var(--brand-blue-dark) 100%);
     
     --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     
@@ -88,35 +109,36 @@ img {
 }
 
 .btn-primary {
-    background-color: var(--color-secondary);
+    background: var(--grad-success);
     color: var(--color-white);
     box-shadow: var(--shadow-md);
+    border: none;
 }
 
 .btn-primary:hover {
-    background-color: var(--color-secondary-light);
+    background: linear-gradient(135deg, var(--brand-green-light) 0%, var(--brand-blue) 100%);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--color-primary);
-    border: 2px solid var(--color-primary);
+    color: var(--brand-blue);
+    border: 2px solid var(--brand-blue);
 }
 
 .btn-secondary:hover {
-    background-color: var(--color-primary);
+    background-color: var(--brand-blue);
     color: var(--color-white);
 }
 
 .btn-accent {
-    background-color: var(--color-accent);
+    background: var(--grad-premium);
     color: var(--color-white);
 }
 
 .btn-accent:hover {
-    background-color: #5b21b6;
+    filter: brightness(1.1);
     transform: translateY(-2px);
 }
 
@@ -178,11 +200,24 @@ header {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, #1e1b4b 100%);
+    background: var(--grad-premium);
     color: var(--color-white);
-    padding: 6rem 0;
+    padding: 8rem 0;
     position: relative;
     overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 40%;
+    height: 40%;
+    background: var(--brand-green-light);
+    filter: blur(120px);
+    opacity: 0.2;
+    border-radius: 50%;
 }
 
 .hero::after {
@@ -192,9 +227,9 @@ header {
     right: -50px;
     width: 300px;
     height: 300px;
-    background: var(--color-accent);
+    background: var(--brand-purple-light);
     filter: blur(100px);
-    opacity: 0.3;
+    opacity: 0.4;
     border-radius: 50%;
 }
 
@@ -344,7 +379,7 @@ header {
     justify-content: center;
     width: 32px;
     height: 32px;
-    background-color: var(--color-secondary);
+    background-color: var(--brand-green);
     border-radius: 50%;
     flex-shrink: 0;
 }
@@ -415,6 +450,30 @@ footer {
     color: var(--color-secondary-light);
 }
 
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--color-white);
+    transition: all var(--transition-fast);
+}
+
+.social-icon:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-3px);
+    color: var(--color-white);
+}
+
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
@@ -425,10 +484,23 @@ footer {
 
 /* Page Headers */
 .page-header {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    background: var(--grad-premium);
     color: var(--color-white);
-    padding: 4rem 0;
+    padding: 5rem 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="white" fill-opacity="0.1"/></svg>');
+    opacity: 0.3;
 }
 
 .page-header h1 {
@@ -507,4 +579,33 @@ textarea.form-control {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+}
+
+/* Blog Content Styles */
+.blog-article {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #334155;
+}
+
+.blog-article p {
+    text-align: justify;
+    margin-bottom: 1.5rem;
+    hyphens: auto;
+}
+
+.blog-article h2, .blog-article h3 {
+    color: var(--color-primary);
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+}
+
+.blog-article ul, .blog-article ol {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+}
+
+.blog-article li {
+    margin-bottom: 0.75rem;
+    text-align: justify;
 }
